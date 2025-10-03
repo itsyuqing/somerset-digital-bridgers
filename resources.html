@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resources — Somerset Digital Bridgers</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #333;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    
+    /* first grid */
+    .grid-resources {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .card img, .card svg {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+    }
+    .card a {
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+
+    /* second layout */
+    .grid-help {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .help-card {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px 20px;
+      transition: box-shadow 0.2s;
+    }
+    .help-card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .help-card img {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+    }
+    .help-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .help-text a {
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <h1>Somerset Digital Bridgers</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="policy.html">Policy Makers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+  <h2>Resources</h2>
+    <div class="grid-resources">
+        <div class="card" onclick="window.location.href='https://sclsnj.org/services/computers-and-wifi/'">
+          <img src="https://img.icons8.com/ios/50/book.png" alt="Guide">
+          <p><a href="#">Somerset County Library System</a></p>
+          <p>Access to hotspots, internet, and techonology.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='https:////ldi.njit.edu/njdol-digital-equity-training-grantnjit%E2%80%99s-building-digital-bridges-program'">
+          <img src="https://img.icons8.com/ios/50/database.png" alt="Database">
+          <p><a href="#">NJIT "Building Digital Bridges" Program</a></p>
+          <p>Provides digital literacy training, access to internet, industry-recognized certifications, and career development support.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='https://www.lifelinesupport.org/'">
+          <img src="https://img.icons8.com/ios/50/chat.png" alt="Collaboration">
+          <p><a href="#">The Lifeline Program               </a></p>
+          <p>Lowers the monthly cost of phone or internet service.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='https://www.njstatelib.org/services_for_libraries/grant-opportunities/digital-navigation-corps'">
+          <img src="https://img.icons8.com/ios/50/picture.png" alt="Media">
+          <p><a href="#">Digital Navigation Corps</a></p>
+          <p>Offera personalized assistance with digital skills, device access, and affordable internet.</p>
+        </div>
+    </div>
+
+  <h2>How to Help</h2>
+  <div class="grid-help">
+    <div class="help-card">
+      <img src="https://img.icons8.com/ios/50/volunteering.png" alt="Volunteer">
+      <div class="help-text" onclick="window.location.href='https://www.computers4people.org/support'">
+        <a href="#">Computers 4 People</a>
+        <span>By refurbishing donated devices, teaching essential digital skills, and improving connectivity, we aim to bridge the digital divide and create opportunities for individuals and communities to thrive in the digital age.</span>
+      </div>
+    </div>
+
+    <div class="help-card">
+      <img src="https://img.icons8.com/ios/50/donate.png" alt="Donate">
+      <div class="help-text" onclick="window.location.href='https://www.human-i-t.org/donate/'">
+        <a href="#">human-i-t</a>
+        <span>works to bridge the digital divide by providing access to affordable internet and distributing refurbished computers and devices to those in need. .</span>
+      </div>
+    </div>
+
+    <div class="help-card">
+      <img src="https://img.icons8.com/ios/50/megaphone.png" alt="Spread the word">
+      <div class="help-text" onclick="window.location.href='https://givingnet.org/'">
+          <a href="#">The Giving Network</a>
+          <span>all-volunteer nonprofit that accepts donated household goods, including electronics, for families and individuals in need in the area.</span>
+        </div>
+    </div>
+
+    <div class="help-card">
+      <img src="https://img.icons8.com/ios/50/picture.png" alt="Media">
+      <div class="help-text" onclick="window.location.href='https://sustainability.att.com/cr/bridging-digital-divide'">
+          <a href="#">AT&T foundation</a>
+          <span>supports initiatives to bridge the digital divide by funding digital literacy programs, deploying digital navigators, and providing free educational platforms like The Achievery.</span>
+        </div>
+    </div>
+  </div>
+
+  <footer class="container">
+    <div>© <span id="year"></span> Somerset Digital Bridgers</div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+
+</body>
+</html>
