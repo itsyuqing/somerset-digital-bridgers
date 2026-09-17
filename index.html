@@ -4,159 +4,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Somerset — Home</title>
+  <title>Somerset Digital Bridgers — Home</title>
   <meta name="description" content="Bridging the Digital Gap Website." />
   <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <style>
-    /* basic responsive container */
+    /* Page-specific: county map */
     #map-wrap { max-width: 960px; margin: 0 auto; }
     svg { width: 100%; height: 600px; display: block; }
 
-    /* county styling */
     .county {
-      fill: #e6e6e6;
-      stroke: #444;
+      fill: #e9e4d8;
+      stroke: var(--navy);
       stroke-width: 0.5;
       cursor: pointer;
       transition: fill 150ms ease, stroke 150ms ease;
     }
-    .county:hover, .county:focus { fill: #ffd54d; outline: none; }
+    .county:hover, .county:focus { fill: var(--gold); outline: none; }
     .county:focus { stroke-width: 1; }
-    .county.selected { fill: #ff8a65; }
+    .county.selected { fill: var(--gold-dark); }
 
-    /* tooltip */
     .tooltip {
-      position: absolute; background: #fff; border: 1px solid #ccc; padding: 6px 8px; font-size: 14px;
+      position: absolute; background: var(--surface); border: 1px solid var(--line);
+      padding: 8px 10px; font-size: 13px; font-family: var(--font-body); color: var(--ink);
       pointer-events: none; display: none; z-index: 1000; border-radius: 4px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 14px rgba(28,36,48,0.14);
     }
   </style>
-  
-  <title>Somerset Digital Bridgers</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      color: #1a1a1a;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, #cac9d9, #dfe3e8);
-      border-radius: 20px;
-      color: white;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    .hero-text h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: bold;
-    }
-
-    .hero-text p {
-      font-size: 1.25rem;
-      line-height: 1.6;
-    }
-
-    .hero-image img {
-      max-width: 500px;
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-      flex-direction: column;
-      text-align: center;
-      }
-
-      .hero-text h1 {
-        font-size: 2rem;
-      }
-    }
-  </style>
-
-  <title>Socioeconomic Comparison</title>
-  <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f6f8fb;
-    color: #222;
-    line-height: 1.5;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #1e3a8a;
-  }
-
-  .chart-section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    border-radius: 15px;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  }
-
-  .chart-section h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: #2563eb;
-    text-align: center;
-  }
-
-  .chart-flex {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .chart-canvas {
-    flex: 1;
-    text-align: center;
-  }
-
-  .chart-text {
-    flex: 1;
-    font-size: 1rem;
-    color: #444;
-  }
-
-  canvas {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-  }
-  </style>
-
-  <title>Occupation Treemap</title>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
@@ -167,7 +46,7 @@
       </div>
       <nav aria-label="Main navigation">
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="policy.html">Policy Makers</a></li>
         </ul>
@@ -175,42 +54,56 @@
     </div>
   </header>
 
-
-  <body>
-    <main class="container">
-      <section class="hero">
-        <div class="hero-text">
-          <h1>Somerset Digital Bridgers</h1>
-          <p class="lead">Making change one step at a time.</p>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Closing the digital divide, county by county.</h1>
+        <p class="lead">
+          We track broadband access, computer ownership, and the socioeconomic
+          gaps behind them across all 21 New Jersey counties — and organize
+          locally in Somerset County to help close them.
+        </p>
+        <div class="buttons">
+          <a class="btn" href="#map">Explore the county map</a>
+          <a class="btn secondary" href="resources.html">Find resources</a>
         </div>
-          <div class="hero-image">
-          <img src="dukefarms.jpg" alt="Duke Farms">
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">94%</div>
+          <div class="stat-label">Somerset County households with broadband</div>
         </div>
-      </section>
-    </main>
-  </body>
+        <div class="stat">
+          <div class="stat-value">346,203</div>
+          <div class="stat-label">People living in Somerset County</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">21</div>
+          <div class="stat-label">NJ counties compared on this site</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <main class="container">
-
+  <div class="container" id="map">
+    <div class="section-header">
+      <h2>The digital divide, county by county</h2>
+      <p>Hover any county for its population, broadband access, and household computer ownership.</p>
+    </div>
     <section class="chart-section">
-      <div class="chart-flex">
-        <div class="chart-canvas">
-          <div id="map-wrap">
-            <svg
-              viewBox="minX minY 100 200"
-              version="1.1"
-              id="svg1"
-              sodipodi:docname="New Jersey Counties.svg"
-              width="100"
-              height="200"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:svg="http://www.w3.org/2000/svg">
+      <div class="chart-card">
+        <div class="chart-flex">
+          <div class="chart-canvas">
+            <div id="map-wrap">
+              <svg
+                viewBox="-5 -5 290.3 543.1"
+                version="1.1"
+                id="svg1"
+                width="290.3"
+                height="543.1"
+                xmlns="http://www.w3.org/2000/svg">
 
-              <defs
-                id="defs1"
-                population="defs2"
-                broadband="defs3"
-                computers="defs4"/>
+                <defs id="defs1"/>
 
               <path class="county"
                 d="m 117.23311,449.91575 c -0.713,0.859 -1.781,5.021 -2.373,9.25 -0.904,6.462 -1.435,7.845 -3.326,8.675 -1.271,0.558 -2.244,1.863 -2.235,3 0.016,2.266 2.713,10.463 3.95,12.005 0.445,0.554 1.117,2.879 1.494,5.167 0.551,3.338 0.178,5.232 -1.887,9.596 -1.414,2.991 -2.572,6.148 -2.572,7.015 0,0.867 -1.041,2.849 -2.313,4.403 -3.884,4.747 -6.456,13.031 -6.734,21.69 -0.091,2.804 0.405,2.919 6.719,1.568 5.664,-1.212 10.061,-3.176 4.904,-2.19 -1.909,0.365 -2.576,0.073 -2.576,-1.124 0,-1.078 0.874,-1.617 2.622,-1.617 2.183,0 2.42,-0.244 1.414,-1.456 -1.385,-1.669 -0.451,-3.918 1.203,-2.896 0.694,0.429 0.879,0.103 0.501,-0.883 -0.459,-1.197 0.227,-1.659 2.934,-1.975 4.366,-0.51 5.66,1.711 2.493,4.276 -1.192,0.965 -2.167,2.042 -2.167,2.394 0,1.115 2.799,-0.871 7.382,-5.239 4.216,-4.018 4.382,-4.385 3.293,-7.271 -0.745,-1.974 -0.802,-3.287 -0.161,-3.745 0.542,-0.388 1.849,-2.401 2.904,-4.474 l 1.918,-3.77 -2.224,-2.071 c -3.029,-2.822 -2.366,-5.315 1.514,-5.693 3.065,-0.3 3.116,-0.229 3.608,4.883 0.401,4.172 0.133,5.553 -1.368,7.054 -1.026,1.026 -1.866,2.401 -1.866,3.055 0,1.723 3.473,-2.272 5.91,-6.798 1.153,-2.14 2.864,-4.964 3.804,-6.275 1.673,-2.335 1.661,-2.37 -0.576,-1.66 -1.646,0.523 -2.675,0.211 -3.68,-1.115 -1.774,-2.342 -1.81,-3.341 -0.119,-3.341 0.737,0 1.902,-1.233 2.588,-2.74 1.098,-2.41 1.39,-2.546 2.424,-1.133 0.926,1.267 1.418,1.345 2.328,0.371 2.106,-2.254 6.403,-11.557 5.793,-12.543 -0.773,-1.251 1.614,-3.636 4.099,-4.097 1.144,-0.212 2.866,-2.319 4.233,-5.181 1.668,-3.494 3.235,-5.213 5.681,-6.235 1.858,-0.777 3.679,-1.898 4.047,-2.493 1.21,-1.958 -0.423,-2.251 -3.029,-0.543 -1.408,0.922 -3.066,1.364 -3.686,0.981 -0.674,-0.417 -0.849,-0.248 -0.435,0.422 0.741,1.198 -2.679,5.191 -4.446,5.191 -0.597,0 -0.926,-1.415 -0.75,-3.224 0.353,-3.626 1.494,-3.243 -17.186,-5.782 -4.675,-0.635 -10.3,-1.4 -12.5,-1.699 -2.2,-0.299 -4.888,-1.163 -5.973,-1.92 -2.559,-1.784 -3.982,-1.736 -5.578,0.187"
@@ -338,27 +231,24 @@
                 population="145,117"
                 broadband="94%"
                 computers="93.3%" />
-            </svg>
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="chart-text">
-          <p>
-            This map visualizes the counties of New Jersey, highlighting key socioeconomic indicators such as population, broadband access, and computer ownership. By interacting with each county, users can gain insights into the digital divide and identify areas that may benefit from targeted interventions to improve digital inclusion.
-          </p>
+          <div class="chart-text">
+            <p>
+              This map visualizes the counties of New Jersey, highlighting key socioeconomic indicators such as population, broadband access, and computer ownership. By interacting with each county, users can gain insights into the digital divide and identify areas that may benefit from targeted interventions to improve digital inclusion.
+            </p>
+          </div>
         </div>
       </div>
     </section>
-  </main>
-
+  </div>
 
   <div id="tooltip" class="tooltip" aria-hidden="true"></div>
 
   <script>
-    const tooltip = document.createElement("div");
-    tooltip.className = "tooltip";
-    document.body.appendChild(tooltip);
+    const tooltip = document.getElementById("tooltip");
 
-    // Attach hover events to all counties
     document.querySelectorAll(".county").forEach(county => {
       county.addEventListener("mousemove", e => {
         const countyName = county.id;
@@ -377,31 +267,33 @@
     });
   </script>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Socioeconomic Comparison</h1>
-    </section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Poverty &amp; geography</h2>
+      <p>Poverty rates vary sharply across the state, and the pattern holds even when comparing similarly sized towns.</p>
+    </div>
     <section class="chart-section">
-      <h2>Poverty Rate Comparison</h2>
-      <canvas id="barChart1" width="1200" height="600"></canvas>
-    </section>
-
-    <section class="chart-section">
-      <h2>Geography Comparison</h2>
-      <div class="chart-flex">
-        <div class="chart-canvas">
-          <canvas id="barChart2" width="600" height="400"></canvas>
-        </div>
-        <div class="chart-text">
-          <p>
-            This chart compares poverty rates across urban, suburban, and rural areas. Notice how urban centers like Boston tend to have significantly higher poverty rates than suburban or rural areas such as Hunterdon or Sturbridge. This contrast highlights socioeconomic disparities based on community type and geography.
-          </p>
+      <div class="chart-card">
+        <h3>Poverty rate by county</h3>
+        <canvas id="barChart1" width="1200" height="600"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Urban, suburban, and rural comparison</h3>
+        <div class="chart-flex">
+          <div class="chart-canvas">
+            <canvas id="barChart2" width="600" height="400"></canvas>
+          </div>
+          <div class="chart-text">
+            <p>
+              This chart compares poverty rates across urban, suburban, and rural areas. Notice how urban centers like Boston tend to have significantly higher poverty rates than suburban or rural areas such as Hunterdon or Sturbridge. This contrast highlights socioeconomic disparities based on community type and geography.
+            </p>
+          </div>
         </div>
       </div>
     </section>
-  </main>
-  
-  <script> // First Chart
+  </div>
+
+  <script>
     const canvas1 = document.getElementById('barChart1');
     const ctx1 = canvas1.getContext('2d');
     const labels1 = ['Atlantic', 'Bergen', 'Burlington', 'Camden', 'Cape May', 'Cumberland', 'Essex', 'Gloucester', 'Hudson', 'Hunterdon', 'Mercer', 'Middlesex', 'Monmouth', 'Morris', 'Ocean', 'Passaic', 'Salem', 'Somerset', 'Sussex', 'Union', 'Warren'];
@@ -431,21 +323,20 @@
         const x = padding;
         const y = padding + i * (barHeight + 10);
 
-        ctx.fillStyle = '#60a5fa';
+        ctx.fillStyle = '#1e3a5f';
         ctx.fillRect(x, y, barWidth, barHeight);
 
-        ctx.fillStyle = '#000';
+        ctx.fillStyle = '#1c2430';
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'right';
         ctx.fillText(labels[i], x - 10, y + barHeight / 2);
         ctx.textAlign = 'left';
-        ctx.fillText(val, x + barWidth + 5, y + barHeight / 2);
+        ctx.fillText(String(val), x + barWidth + 5, y + barHeight / 2);
       });
     }
 
     drawHorizontalBarChart(ctx1, labels1, data1, canvas1);
 
-    // Second Chart
     const canvas2 = document.getElementById('barChart2');
     const ctx2 = canvas2.getContext('2d');
     const labels2 = ['Boston, MA', 'Brookline, MA', 'Somerset, NJ', 'Hunterdon, NJ', 'Sturbridge, MA'];
@@ -474,34 +365,31 @@
         const x = padding + i * (barWidth + 20);
         const y = height - padding - barHeight;
 
-        ctx.fillStyle = '#34d399';
+        ctx.fillStyle = '#b8862f';
         ctx.fillRect(x, y, barWidth, barHeight);
 
-
-        ctx.fillStyle = '#111';
+        ctx.fillStyle = '#1c2430';
         ctx.textAlign = 'center';
         ctx.fillText(labels[i], x + barWidth / 2, height - padding + 20);
-        ctx.fillText(val, x + barWidth / 2, y - 5);
+        ctx.fillText(String(val), x + barWidth / 2, y - 5);
       });
     }
 
     drawBarChart2(ctx2, labels2, data2, canvas2);
   </script>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Mental Health</h1>
-    </section>
-
+  <div class="container">
+    <div class="section-header">
+      <h2>Mental health</h2>
+      <p>Depression rates by county, compared against the New Jersey statewide average.</p>
+    </div>
     <section class="chart-section">
-      <h2>Mental Health: Depression by County</h2>
-      <div class="chart-flex">
-        <div class="chart-canvas">
-          <canvas id="depressionChart" width="1200" height="800"></canvas>
-        </div>
+      <div class="chart-card">
+        <h3>Depression rate by county</h3>
+        <canvas id="depressionChart" width="1200" height="800"></canvas>
       </div>
     </section>
-  </main>
+  </div>
 
   <script>
     const canvas3 = document.getElementById('depressionChart');
@@ -521,7 +409,7 @@
       21.9, 14.3, 13.5, 15.7 // last one = NJ average
     ];
 
-    function drawHorizontalBarChart(ctx, labels, data, canvas) {
+    function drawHorizontalBarChart2(ctx, labels, data, canvas) {
       const width = canvas.width;
       const height = canvas.height;
       ctx.clearRect(0, 0, width, height);
@@ -534,26 +422,22 @@
       const maxVal = Math.max(...data);
       const scaleFactor = 0.9;
 
-      // Axes
-      ctx.strokeStyle = '#aaa';
+      ctx.strokeStyle = '#ddd';
       ctx.beginPath();
       ctx.moveTo(padding, padding);
       ctx.lineTo(padding, height - padding);
       ctx.lineTo(width - padding, height - padding);
       ctx.stroke();
 
-      // Bars
       data.forEach((val, i) => {
         const barWidth = (val / maxVal) * chartWidth * scaleFactor;
         const x = padding;
         const y = padding + i * (barHeight + 8);
 
-        // Highlight NJ average in green
-        ctx.fillStyle = (labels[i] === 'New Jersey') ? '#4CAF50' : '#1E40AF';
+        ctx.fillStyle = (labels[i] === 'New Jersey') ? '#b8862f' : '#1e3a5f';
         ctx.fillRect(x, y, barWidth, barHeight);
 
-        // Labels
-        ctx.fillStyle = '#000';
+        ctx.fillStyle = '#1c2430';
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'right';
         ctx.fillText(labels[i], x - 10, y + barHeight / 2);
@@ -562,32 +446,28 @@
       });
     }
 
-    drawHorizontalBarChart(ctx3, labels3, data3, canvas3);
+    drawHorizontalBarChart2(ctx3, labels3, data3, canvas3);
   </script>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Education Comparison</h1>
-    </section>
-
+  <div class="container">
+    <div class="section-header">
+      <h2>Education</h2>
+      <p>Share of residents with no schooling completed, by county.</p>
+    </div>
     <section class="chart-section">
-      <h2>No Schooling Completed</h2>
-      <div class="chart-flex">
-        <div class="chart-canvas">
-          <div id="treemap" style="width:100%;height:600px;"></div>
-        </div>
+      <div class="chart-card">
+        <h3>No schooling completed</h3>
+        <div id="treemap" style="width:100%;height:600px;"></div>
       </div>
     </section>
-  </main>
-
+  </div>
 
   <script>
-    var data = [{
+    var treemapData = [{
       type: "treemap",
-      
       labels: [
             "Atlantic","Bergen","Burlington","Camden","Cape May","Cumberland",
-            "Essex","Gloucester","Hudson","Hunterdon","Mercer","'Middlesex",
+            "Essex","Gloucester","Hudson","Hunterdon","Mercer","Middlesex",
             "Monmouth","Morris","Ocean","Passaic","Salem","Somerset",
             "Sussex","Union","Warren"
       ],
@@ -595,7 +475,7 @@
       "","","","","","",
       "","","","","","",
       "","","","","","",
-      "","","",""
+      "","",""
       ],
       values: [
       10.5, 7.3, 5.1, 10.5, 3.9, 20.9, 12.3, 4.9, 12.0,
@@ -604,26 +484,29 @@
       ],
 
       textinfo: "label+value+percent entry",
-      marker: { colorscale: "Set3" },
-      hoverinfo: "label+value+percent entry", // remove icons, only show text
-      hoverlabel: { font: { size: 12 } } // smaller hover text
+      marker: { colorscale: [[0, "#eef1f5"], [0.5, "#7d94ab"], [1, "#1e3a5f"]] },
+      hoverinfo: "label+value+percent entry",
+      hoverlabel: { font: { size: 12 } }
     }];
 
-    var layout = {
-      margin: { t: 50, l: 25, r: 25, b: 25 },
-      hovermode: false // disables the default hover icons
+    var treemapLayout = {
+      margin: { t: 10, l: 10, r: 10, b: 10 },
+      font: { family: "Public Sans, sans-serif" }
     };
 
-    Plotly.newPlot('treemap', data, layout, {displaylogo: false, displayModeBar: false});
+    Plotly.newPlot('treemap', treemapData, treemapLayout, {displaylogo: false, displayModeBar: false});
   </script>
 
-  <footer class="container">
-    <div>© <span id="year"></span> Somerset Digital Bridgers </div>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Somerset Digital Bridgers</div>
+      <div>Bridging the digital gap in Somerset County, NJ</div>
+    </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-    
+
 </body>
 </html>

@@ -7,27 +7,43 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name    = htmlspecialchars($_POST["name"]);
-    $email   = htmlspecialchars($_POST["email"]);
-    $message = htmlspecialchars($_POST["message"]);
+
+    $name    = trim(htmlspecialchars($_POST["name"] ?? ""));
+    $email   = trim($_POST["email"] ?? "");
+    $message = trim(htmlspecialchars($_POST["message"] ?? ""));
+
+    if ($name === "" || $message === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo "Please fill in your name, a valid email, and a message.";
+        exit;
+    }
+    $email = htmlspecialchars($email);
 
     $mail = new PHPMailer(true);
 
     try {
-        // SMTP setup
+        $smtpUser = getenv('CONTACT_SMTP_USER');
+        $smtpPass = getenv('CONTACT_SMTP_PASS');
+        $toAddress = getenv('CONTACT_TO_EMAIL') ?: $smtpUser;
+
+        if (!$smtpUser || !$smtpPass) {
+            http_response_code(500);
+            echo "Server email is not configured.";
+            exit;
+        }
+
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';       // SMTP server
+        $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'YOUR_EMAIL@gmail.com'; // your Gmail
-        $mail->Password   = 'YOUR_APP_PASSWORD';    // Gmail App Password
+        $mail->Username   = $smtpUser;
+        $mail->Password   = $smtpPass;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
-        // Sender & recipient
-        $mail->setFrom($email, $name);  // from user input
-        $mail->addAddress('YOUR_EMAIL@gmail.com', 'Your Name'); // your inbox
+        $mail->setFrom($smtpUser, 'Somerset Digital Bridgers Website');
+        $mail->addReplyTo($email, $name);
+        $mail->addAddress($toAddress);
 
-        // Content
         $mail->isHTML(true);
         $mail->Subject = "New Contact Form Message";
         $mail->Body    = "
@@ -40,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->send();
         echo "Message sent successfully.";
     } catch (Exception $e) {
+        http_response_code(500);
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
-?>
